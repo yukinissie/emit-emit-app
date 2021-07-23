@@ -1,28 +1,42 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div>
+    <input
+      v-model="todoName"
+    />
+    <button @click="addTodo">追加</button>
+    <TodoList
+      :todos='todos'
+      @doneTodoParentHandler='doneTodo'
+    />
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import TodoList from './components/TodoList.vue'
 
 export default {
-  name: 'App',
   components: {
-    HelloWorld
+    TodoList
+  },
+  data() {
+    return {
+      todoName: "",
+      todos: []
+    }
+  },
+  methods: {
+    addTodo() {
+      if (this.todoName) {
+        this.todos.push({
+          todoName: this.todoName,
+          done: false
+        })
+        this.todoName = ""
+      }
+    },
+    doneTodo(index) {
+      this.todos[index].done = !this.todos[index].done
+    }
   }
 }
 </script>
-
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
-}
-</style>
