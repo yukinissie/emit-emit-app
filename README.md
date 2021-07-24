@@ -1,4 +1,5 @@
 # emit-emit-app
+複数階ネストしたVueコンポートでルートコンポートの変数(data)を$emitを用いて書き換えるためのサンプルコード
 
 ## Project setup
 ```
